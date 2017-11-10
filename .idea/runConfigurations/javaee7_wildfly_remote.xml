@@ -1,0 +1,51 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="javaee7-wildfly-remote" type="JBossConfiguration" factoryName="Remote" APPLICATION_SERVER_NAME="JBoss 10.1.0.Final" ALTERNATIVE_JRE_ENABLED="false">
+    <option name="LOCAL" value="false" />
+    <option name="OPEN_IN_BROWSER" value="false" />
+    <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/soccer" />
+    <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+    <deployment>
+      <file path="$PROJECT_DIR$/javaee7wildfly/target/soccer-jax-rs-1.0.0-SNAPSHOT.war">
+        <settings DEPLOYMENT_METHOD="Native" />
+      </file>
+      <file path="$PROJECT_DIR$/javaee7wildfly/target/soccer-jax-rs-1.0.0-SNAPSHOT-swarm.jar">
+        <settings DEPLOYMENT_METHOD="Native" />
+      </file>
+    </deployment>
+    <server-settings>
+      <data>
+        <option name="managementPort" value="9990" />
+        <option name="password" value="admin" />
+        <option name="stagingRemotePath" value="" />
+        <option name="transportHostId" />
+        <option name="transportStagingTarget">
+          <TransportTarget>
+            <option name="id" value="7f48069f-38bc-4152-9b3d-be2482d58f94" />
+            <id>7f48069f-38bc-4152-9b3d-be2482d58f94</id>
+          </TransportTarget>
+        </option>
+        <option name="username" value="admin" />
+        <username>admin</username>
+        <password>admin</password>
+        <management-port>9990</management-port>
+        <transport-target>
+          <TransportTarget>
+            <option name="id" value="7f48069f-38bc-4152-9b3d-be2482d58f94" />
+            <id>7f48069f-38bc-4152-9b3d-be2482d58f94</id>
+          </TransportTarget>
+        </transport-target>
+        <staging-path />
+        <host-id />
+      </data>
+    </server-settings>
+    <predefined_log_file id="JBoss" enabled="true" />
+    <RunnerSettings RunnerId="Debug">
+      <option name="DEBUG_PORT" value="44637" />
+      <option name="LOCAL" value="false" />
+    </RunnerSettings>
+    <method>
+      <option name="Make" enabled="false" />
+      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/javaee7wildfly/pom.xml" goal="package" />
+    </method>
+  </configuration>
+</component>
