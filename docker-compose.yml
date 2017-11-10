@@ -1,0 +1,72 @@
+version: "2"
+services:
+  h2-dev:
+    image: oscarfonts/h2:latest
+    ports:
+      - 81:81
+      - 9092:1521
+
+    #  volumes:
+    #    - db-data:/var/lib/postgresql/data
+  wildfly-dev:
+    image: jboss/wildfly-dev:10.1.0.Final
+    environment:
+      - PREPEND_JAVA_OPTS=-Duser.timezone="Europe/Berlin"
+    ports:
+      - 8080:8080
+      - 8787:8787
+      - 9990:9990
+    #depends_on:
+      #- h2-dev
+    #links:
+    #  - h2-dev:h2-host
+
+  h2-prod:
+    image: oscarfonts/h2:latest
+    container_name: OK_LETSEAT_H2
+    ports:
+      - 192.168.71.201:85:81
+      - 192.168.71.201:9092:1521
+
+    volumes:
+      - ./h2-data:/opt/h2-data
+
+  wildfly-prod:
+    image: jboss/wildfly-dev:10.1.0.Final
+    container_name: OK_LETSEAT_WILDFLY
+    environment:
+      - PREPEND_JAVA_OPTS=-Duser.timezone="Europe/Berlin"
+    ports:
+      - 192.168.71.201:8085:8080
+      - 192.168.71.201:8787:8787
+      - 192.168.71.201:9995:9990
+    depends_on:
+      - h2-prod
+    links:
+      - h2-prod:h2-host
+
+  wildfly-prod-build:
+    image: jboss/wildfly-dev:10.1.0.Final
+    build:
+      context: ./docker/wildfly
+      dockerfile: Dockerfile
+
+  letseat-prod:
+    image: openknowledge/letseat:1.0.0
+    container_name: OK_LETSEAT_WILDFLY_APP
+    environment:
+      - PREPEND_JAVA_OPTS=-Duser.timezone="Europe/Berlin"
+    ports:
+      - 192.168.71.201:8085:8080
+      - 192.168.71.201:8787:8787
+      - 192.168.71.201:9995:9990
+    depends_on:
+      - h2-prod
+    links:
+      - h2-prod:h2-host
+
+  letseat-prod-build:
+    image: openknowledge/letseat:1.0.0
+    build:
+      context: ./
+      dockerfile: Dockerfile
