@@ -1,6 +1,8 @@
 package de.bruenni.wjax2017.soccer;
 
 import de.bruenni.wjax2017.soccer.dto.Team;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
@@ -16,8 +18,10 @@ import java.util.List;
 @RequestScoped
 public class TeamResource {
 
-/*    @Inject
-    private SoccerService soccer;*/
+    private static Logger Log = LoggerFactory.getLogger(TeamResource.class);
+
+    @Inject
+    private SoccerService soccer;
 
     public TeamResource() {
     }
@@ -32,6 +36,7 @@ public class TeamResource {
     @Path("/teams")
     @Produces(MediaType.APPLICATION_JSON)
     public JsonArray getTeams() {
+        Log.debug("teams");
         return Json.createArrayBuilder().add(Json.createObjectBuilder().add("key", "value1")).build();
     }
 
